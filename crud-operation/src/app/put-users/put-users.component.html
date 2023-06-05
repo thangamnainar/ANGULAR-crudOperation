@@ -1,7 +1,8 @@
 <p>put-users works!</p>
-<input type="text" [(ngModel)]="Name" placeholder="UserName">
+<!-- <input type="text" [(ngModel)]="Name" placeholder="UserName">
 <input type="text" [(ngModel)]="age" placeholder="age">
 <input type="text" [(ngModel)]="gender" placeholder="gender">
 <input type="button" (click)="Createauser()" value="createButton">
-<!-- {{uName}} -->
-{{getUsers|json}}
+{{uName}}
+{{getUsers|json}} -->
+<app-form (newItemEvent)="getUserDetails($event)"></app-form>

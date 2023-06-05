@@ -19,8 +19,12 @@ export class UsersComponent implements OnInit {
     })
   }
   getAboutUserData(id:number){
+    let json={
+      name:'thangam',
+      age:21
+    }
     this.userId=id;
-    this.router.navigate(['userDetails',id])
+    this.router.navigate(['userDetails/'+json+'/'+this.userId])
     // console.log(this.userId);
     
   }

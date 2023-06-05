@@ -41,4 +41,11 @@ export class PutUsersComponent {
     console.warn(this.getUsers);
 
   }
+
+  getUserDetails(event: any){
+    let getUser='';
+    getUser=event
+    console.log('userssssssss',getUser);
+    
+  }
 }

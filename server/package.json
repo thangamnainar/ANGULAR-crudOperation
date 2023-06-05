@@ -14,6 +14,10 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
-    "@types/node": "^20.2.4"
+    "@types/mysql": "^2.15.21",
+    "@types/node": "^20.2.4",
+    "install": "^0.13.0",
+    "npm": "^9.6.7",
+    "or": "^0.2.0"
   }
 }

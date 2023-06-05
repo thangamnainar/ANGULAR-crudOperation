@@ -49,10 +49,10 @@ export class GetusersComponent implements OnInit ,AfterViewInit,AfterViewChecked
   }
   ngAfterViewChecked(): void {
     // throw new Error('Method not implemented.');
-    this.object.getUserFromDatabase().subscribe((data: getUser[]) => {
-      this.getUsers = data;
-      console.warn(this.getUsers);
-    })
+    // this.object.getUserFromDatabase().subscribe((data: getUser[]) => {
+    //   this.getUsers = data;
+    //   console.warn(this.getUsers);
+    // })
   }
   
 

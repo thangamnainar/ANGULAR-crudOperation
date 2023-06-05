@@ -9,13 +9,15 @@ import { GetusersComponent } from './get-users/get-users.component';
 import { PutUsersComponent } from './put-users/put-users.component';
 import { UsersComponent } from './users/users.component';
 import { UserdetailsComponent } from './userdetails/userdetails.component';
+import { FormComponent } from './form/form.component';
 @NgModule({
   declarations: [
     AppComponent,
     GetusersComponent,
     PutUsersComponent,
     UsersComponent,
-    UserdetailsComponent
+    UserdetailsComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
