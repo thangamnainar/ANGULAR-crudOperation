@@ -1,0 +1,38 @@
+<p>getusers works!</p>
+<!-- {{getTenUser | json}} -->
+
+<!-- <table>
+    <h3>get 10 User data</h3>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>City</th>
+    </tr>
+    <tr *ngFor="let person of  getTenUser">
+        <td>{{person.id}}</td>
+        <td>{{ person.name }}</td>
+        <td>{{ person.email }}</td>
+        <td>{{ person.address.city }}</td>
+    </tr>
+</table> -->
+
+<!-- <h5>Users: {{getUser|json}}........</h5> -->
+<div class="">
+   
+    <h3>get User From Database</h3>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+        </tr>
+        <tr *ngFor="let person of  getUsers">
+            <td>{{person.id}}</td>
+            <td>{{ person.name }}</td>
+            <td>{{ person.age }}</td>
+            <td>{{ person.gender }}</td>
+        </tr>
+    </table>
+</div>

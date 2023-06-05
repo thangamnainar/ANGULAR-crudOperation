@@ -1,0 +1,15 @@
+<p>userdetails works!</p>
+{{getOneUser|json}}
+<form action="" #myform="ngForm">
+    <div class="form-group">
+        <label for=""> Name</label>
+        <input type="text" placeholder="Name" name='name' class="form-control" [(ngModel)]="firstName">
+    </div>
+    <div class="form-group">
+        <label for="">Last Name</label>
+        <input type="text" placeholder="Name" name='lastname' class="form-control"  [(ngModel)]="lastName">
+    </div>
+    <button (click)="clickFun(myform.value)"> btrm</button>
+</form>
+<!-- {{ts.value}} -->
+{{myform.value | json}} 

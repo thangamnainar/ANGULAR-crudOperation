@@ -1,0 +1,21 @@
+<p>users works!</p>
+
+<!-- {{getusers|json}} -->
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of getusers">
+            <td>{{user.id}}</td>
+            <th (click)="getAboutUserData(user.id)">{{user.name}}</th>
+            <th>{{user.age}}</th>
+            <th>{{user.gender}}</th>
+        </tr>
+    </tbody>
+</table>
