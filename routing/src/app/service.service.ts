@@ -14,16 +14,16 @@ export class ServiceService {
   }
 
 
-  getUserById(id:string | null){
+  getUserById(id:string|null){
     const url= 'http://localhost:3000/getuser/';
     return this.http.get(url+id);
   };
-  createUser(body:any){
+  createUser(body:user[]){
     const url='http://localhost:3000/adduser';
     return this.http.post(url,body);
   };
 
-  updateUser(updateData:any){
+  updateUser(updateData:user[]){
     const url='http://localhost:3000/updateuser';
     return this.http.put(url,updateData);
   };
@@ -34,4 +34,9 @@ export class ServiceService {
     return this.http.put(url,id);
   };
   
+}
+export interface user{
+  name:string,
+  age:number,
+  gender:string
 }

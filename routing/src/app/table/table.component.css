@@ -1,1 +1,9 @@
-/*# sourceMappingURL=table.component.css.map */
+.studentTable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.studentTable td, .studentTable th {
+  border: 1px solid;
+  padding: 8px;
+}/*# sourceMappingURL=table.component.css.map */

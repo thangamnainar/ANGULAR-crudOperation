@@ -1,7 +1,13 @@
 import { Component,OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
-import { ServiceService } from '../service.service';
+import { ServiceService,user } from '../service.service';
 
+interface userdetails{
+  id:number,
+  name:string,
+  age:number,
+  gender:string
+}
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -14,10 +20,11 @@ export class FormComponent implements OnInit{
   name:string='';
   age!:number;
   gender!:any;
-  studentObject:any;
+  studentObject:user[]=[];
+  studentObject2!:userdetails;
   id!:number;
 
-  table(value:any){
+  table(value:user[]){
     this.studentObject=value;
     this.obj.createUser(this.studentObject).subscribe({
       next:(response) =>{
@@ -42,7 +49,7 @@ export class FormComponent implements OnInit{
     
   }
  update(){
-  this.studentObject={
+  this.studentObject2={
     id:this.id,
     name:this.name,
     age:this.age,

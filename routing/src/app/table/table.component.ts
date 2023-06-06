@@ -1,4 +1,4 @@
-import { Component ,OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
 
@@ -7,32 +7,31 @@ import { Router } from '@angular/router';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit{
-  getUsers:any;
-constructor (private obj:ServiceService,private route:Router){}
+export class TableComponent implements OnInit {
+  getUsers: any;
+  constructor(private obj: ServiceService, private route: Router) { }
 
   ngOnInit(): void {
-    this.obj.getUserFromDatabase().subscribe( data => {
-      this.getUsers=data;
+    this.obj.getUserFromDatabase().subscribe(data => {
+      this.getUsers = data;
     })
   }
-  edit(id:number){
-    this.route.navigate(['form',id])
+  edit(id: number) {
+    this.route.navigate(['form', id])
   }
-  delete(id:number){
+  delete(id: number) {
     this.obj.deleteUser(id).subscribe({
-      next:(response)=>{
-        console.log(response);        
+      next: (response) => {
+        console.log(response);
+        // this.obj.getUserFromDatabase().subscribe(data => {
+        //   this.getUsers = data;
+        // });
+        this.ngOnInit()
       },
-      error:(error)=>{
-        console.log(error);   
+      error: (error) => {
+        console.log(error);
       }
-    })    
-    console.log(id);
-    this.obj.getUserFromDatabase().subscribe( data => {
-      this.getUsers=data;
-    })
-    
+    });
   }
-
+  
 }
