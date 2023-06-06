@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import{HttpClient} from '@angular/common/http'
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,8 +22,10 @@ export class ServiceService {
     return this.http.post(url,body);
   };
 
-  updateUser(updateData:user[]){
+  updateUser(updateData:userdetails){
     const url='http://localhost:3000/updateuser';
+    console.warn('service.',updateData);
+    
     return this.http.put(url,updateData);
   };
 
@@ -39,4 +40,11 @@ export interface user{
   name:string,
   age:number,
   gender:string
+}
+
+export interface userdetails {
+  id: number,
+  name: string,
+  age: number,
+  gender: string
 }
