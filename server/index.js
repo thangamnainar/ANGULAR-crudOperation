@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require('express');
 var mysql = require("mysql");
 var cors = require('cors');
+var bodyParser = require('body-parser');
 var DataBase = /** @class */ (function () {
     function DataBase() {
         this._connection = mysql.createConnection({
@@ -36,10 +37,12 @@ var ExpressApp = /** @class */ (function () {
         this.app.use(cors({
             origin: 'http://localhost:4200',
         }));
+        this.app.use(bodyParser.json());
         this.app.get('/getUsers', function (req, res) { return _this.getUsers(req, res); });
         this.app.get('/getUser/:id', function (req, res) { return _this.getUser(req, res); });
         this.app.post('/adduser', function (req, res) { return _this.addUser(req, res); });
-        // this.app.put('/updateuser', (req: Request, res: Response) => this.updateUser(req, res));
+        this.app.put('/updateuser', function (req, res) { return _this.updateUser(req, res); });
+        this.app.put('/deleteuser', function (req, res) { return _this.deleteUser(req, res); });
         this.listen();
     }
     ExpressApp.prototype.getUsers = function (req, res) {
@@ -90,12 +93,24 @@ var ExpressApp = /** @class */ (function () {
         });
     };
     ExpressApp.prototype.updateUser = function (req, res) {
-        var _a = req.body, username = _a.username, password = _a.password, id = _a.id;
-        var sql = "update sign_in_details set username = ?, password = ? where id = ?";
-        this.dataBase.connection.query(sql, [username, password, id], function (err, result) {
+        var _a = req.body, name = _a.name, age = _a.age, gender = _a.gender, id = _a.id;
+        var sql = "update testTable set name = ?, age = ? , gender = ? where id = ?";
+        this.dataBase.connection.query(sql, [name, age, gender, id], function (err, result) {
             if (err) {
                 console.log(err);
                 res.end();
+            }
+            else {
+                res.json(result);
+            }
+        });
+    };
+    ExpressApp.prototype.deleteUser = function (req, res) {
+        var id = req.body.id;
+        var sql = "update testTable set isActive = ? where id = ?";
+        this.dataBase.connection.query(sql, [1, id], function (err, result) {
+            if (err) {
+                console.log(err);
             }
             else {
                 res.json(result);

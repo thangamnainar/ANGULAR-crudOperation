@@ -6,9 +6,10 @@ const express = require('express');
 import { Express, Request, Response } from 'express';
 import * as mysql from 'mysql';
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 class DataBase {
-    private _connection: mysql.Connection;  
+    private _connection: mysql.Connection;
     constructor() {
         this._connection = mysql.createConnection({
             host: '127.0.0.1',
@@ -17,8 +18,8 @@ class DataBase {
             password: 'Thasan24',
             database: 'test',
         });
-        
-       
+
+
         this._connection.connect();
     }
     get connection() {
@@ -35,49 +36,50 @@ class ExpressApp {
         this.dataBase = new DataBase();
         this.app.use(cors({
             origin: 'http://localhost:4200',
-          }));
-
+        }));
+        this.app.use(bodyParser.json());
         this.app.get('/getUsers', (req: Request, res: Response) => this.getUsers(req, res));
         this.app.get('/getUser/:id', (req: Request, res: Response) => this.getUser(req, res));
         this.app.post('/adduser', (req: Request, res: Response) => this.addUser(req, res));
-        // this.app.put('/updateuser', (req: Request, res: Response) => this.updateUser(req, res));
+        this.app.put('/updateuser', (req: Request, res: Response) => this.updateUser(req, res));
+        this.app.put('/deleteuser', (req: Request, res: Response) => this.deleteUser(req, res));
         this.listen();
     }
 
     public getUsers(req: Request, res: Response): any {
         let sql = `select id,name,age,gender from testTable where isActive = 0`;
         // let sql = 'select * from testTable';
-        this.dataBase.connection.query(sql,(err: any, result: any) => {
+        this.dataBase.connection.query(sql, (err: any, result: any) => {
             if (err) {
                 console.log(err);
             } else {
-                if (result.length > 0){
+                if (result.length > 0) {
                     res.json(result);
-                }else{
-                    res.json({message:"No User Found"});
+                } else {
+                    res.json({ message: "No User Found" });
                 }
             }
         })
     }
     public getUser(req: Request, res: Response): any {
-        const id=req.params.id;
+        const id = req.params.id;
         let sql = "select * from testTable where id= ?"
-        this.dataBase.connection.query(sql,id, (err: any, result: any) => {
+        this.dataBase.connection.query(sql, id, (err: any, result: any) => {
             if (err) {
                 console.log(err);
             } else {
-                if (result.length > 0){
+                if (result.length > 0) {
                     res.json(result);
-                }else{
-                    res.json({message:"No User Found"});
+                } else {
+                    res.json({ message: "No User Found" });
                 }
             }
         })
     }
     public addUser(req: Request, res: Response): any {
-        const {name, age,gender } = req.body;
+        const { name, age, gender } = req.body;
         let sql: string = "insert into testTable (name,age,gender) values(?,?,?)";
-        this.dataBase.connection.query(sql, [name, age,gender], (err: any, result: any) => {
+        this.dataBase.connection.query(sql, [name, age, gender], (err: any, result: any) => {
             if (err) {
                 console.log(err);
                 res.end(err);
@@ -87,28 +89,37 @@ class ExpressApp {
         })
     }
     public updateUser(req: Request, res: Response): any {
-        const { username, password, id } = req.body;
-        let sql: string = "update sign_in_details set username = ?, password = ? where id = ?";
-        
-        this.dataBase.connection.query(sql, [username, password, id], (err: any, result: any) => {
-          if (err) {
-            console.log(err);
-            res.end();
-          } else {
-            res.json(result);
-          }
+        const { name, age, gender, id } = req.body;
+        let sql: string = "update testTable set name = ?, age = ? , gender = ? where id = ?";
+        this.dataBase.connection.query(sql, [name, age, gender, id], (err: any, result: any) => {
+            if (err) {
+                console.log(err);
+                res.end();
+            } else {
+                res.json(result);
+            }
         });
-      }
-      
+    }
 
+    private deleteUser(req: Request, res: Response): any {
+        const { id } = req.body;
+        let sql: string = "update testTable set isActive = ? where id = ?";
+        this.dataBase.connection.query(sql, [1, id], (err: any, result: any) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.json(result);
+            }
+        });
+    }
     public listen() {
         this.app.listen(3000, () => {
             console.log('app running on port:3000');
         })
     }
 
-  
-      
+
+
 
 }
 

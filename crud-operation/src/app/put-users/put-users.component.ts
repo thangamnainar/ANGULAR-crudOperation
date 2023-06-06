@@ -28,6 +28,7 @@ export class PutUsersComponent {
       next: (response: postData[]) => {
         console.log('POST request successful:', response);
       },
+      
       error: (error: postData[]) => {
         console.error('POST request error:', error);
       }
