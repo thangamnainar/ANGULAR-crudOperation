@@ -11,7 +11,7 @@ const routes: Routes = [
     path:'table',component:TableComponent
   },
   {
-    path:'form/:id',component:FormComponent
+    path:'form/:id/:visible',component:FormComponent
   },
 ];
 

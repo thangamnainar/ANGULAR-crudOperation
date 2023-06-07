@@ -21,7 +21,12 @@
             </label>
         </div>
         <div class="form-group">
-            <button id="btn" type="submit" (click)="table(myForm.value)">Create</button> <button (click)="update()">update</button>
+            <div *ngIf="!boolean; else elseBlock">
+                <button id="btn" type="submit"  (click)="Create(myForm.value)">Create</button>
+            </div> 
+            <ng-template #elseBlock>
+                <button id="btn" type="submit" (click)="update()">Update</button>
+            </ng-template>
         </div>
     </form>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit,Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ServiceService, user, userdetails } from '../service.service';
 
@@ -18,8 +18,9 @@ export class FormComponent implements OnInit {
   studentObject: user[] = [];
   studentObject2!: userdetails;
   id!: number;
+  boolean: boolean = true;
 
-  table(value: user[]) {
+  Create(value: user[]) {
     this.studentObject = value;
     this.obj.createUser(this.studentObject).subscribe({
       next: (response) => {
@@ -35,6 +36,9 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.boolean =Boolean( this.activatedRoute.snapshot.paramMap.get('visible'));
+    console.log('||............||',this.boolean);
+    
     this.obj.getUserById(id).subscribe((data) => {
       console.log(typeof data); // Check the type of `data`
       
@@ -44,6 +48,8 @@ export class FormComponent implements OnInit {
         this.name = userDetails.name;
         this.age = userDetails.age;
         this.gender = userDetails.gender;
+        console.warn('userDetails', userDetails);
+        
       }
     });
   }

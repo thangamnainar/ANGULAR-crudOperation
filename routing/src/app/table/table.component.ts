@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit,Output } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class TableComponent implements OnInit {
   getUsers: any;
-  constructor(private obj: ServiceService, private route: Router) { }
+  Visible:boolean=false;
+  
+  constructor(private obj: ServiceService, private route: Router) { };
 
   ngOnInit(): void {
     this.obj.getUserFromDatabase().subscribe(data => {
@@ -17,7 +19,8 @@ export class TableComponent implements OnInit {
     })
   }
   edit(id: number) {
-    this.route.navigate(['form', id])
+    console.log('id', id, this.Visible);    
+    this.route.navigate(['form', id,this.Visible ]);
   }
   delete(id: number) {
     this.obj.deleteUser(id).subscribe({
@@ -33,5 +36,11 @@ export class TableComponent implements OnInit {
       }
     });
   }
+  reciveVisible(data:string){
+    // this.Visible=data;
+    data='display:block';
+    // console.log('||||',data);    
+    
+  } 
   
 }
